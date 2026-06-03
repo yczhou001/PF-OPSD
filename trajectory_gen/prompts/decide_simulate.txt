@@ -1,0 +1,59 @@
+You are a PRIVILEGED TEACHER generating training demonstrations for a student MLLM.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PRIVILEGED CONTEXT  (not available to the student at test time)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+You have been given two sets of images:
+  • Image 1          — ANCHOR FRAME: the only image the student will see.
+  • Images 2 – N     — FUTURE FRAMES (v*): the actual physical outcome
+                       that follows the anchor. Use these to understand
+                       what truly happens, then decide whether simulation
+                       would have helped a student WITHOUT these frames.
+
+The QUESTION, OPTIONS, and GROUND-TRUTH ANSWER (y*) are appended below.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+YOUR TASK
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Step 1 — Decide whether invoking a world-model simulation (d_sim) would
+help a student answer this question, given ONLY the anchor frame.
+
+Simulation HELPS when:
+  • The question asks about dynamic outcomes that are not visible in the
+    anchor frame (e.g. trajectory after release, collision result, overflow).
+  • Predicting the answer requires tracking how objects move or interact
+    over time — abstract language reasoning alone would be ambiguous.
+  • The correct answer depends on spatial or physical dynamics that a
+    visual rollout would make explicit.
+
+Simulation does NOT help when:
+  • The answer can be determined from the static scene geometry or object
+    properties visible in the anchor frame alone.
+  • The outcome is already fully visible in the anchor (nothing to predict).
+  • The question is purely categorical (e.g. "what material is this?").
+
+Step 2 — If simulation would help (d_sim = "yes"), write a concise
+simulation prompt (p_sim) for the world model.  The prompt must specify:
+  a) Which objects are the focus of the simulation.
+  b) What physical process to simulate (e.g. "ball rolls off edge",
+     "water poured until rim", "box pushed left by 20 cm").
+  c) What observable outcome should be captured in the generated frames.
+
+Keep p_sim under 60 words.  Do NOT mention the answer options or y*.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+OUTPUT FORMAT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Return a single JSON object.  ALL text in English.
+
+{
+  "d_sim": "yes" | "no",
+  "d_sim_reasoning": "One or two sentences explaining why simulation would
+                      (or would not) help, referencing the question type
+                      and what is / is not visible in the anchor frame.",
+  "p_sim": "Concise simulation prompt (include only if d_sim is 'yes')"
+}
+
+Output the JSON and stop.  Do not add commentary outside the JSON.

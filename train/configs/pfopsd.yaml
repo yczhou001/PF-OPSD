@@ -1,0 +1,59 @@
+# Stage 2 PF-OPSD configuration
+# All values here override the defaults in stage2_pfopsd.py
+
+# Model — start from Stage 1 checkpoint
+model_name_or_path: "checkpoints/stage1_sft/final"
+attn_implementation: "flash_attention_2"
+
+# Data
+openworldqa_split_dir: "OpenWorldQA_split/train"
+openworldqa_frames_base: "output/frames"
+vrb_split_dir: ""             # leave empty to skip VRQABench
+
+# Output
+output_dir: "checkpoints/stage2_pfopsd"
+
+# Training (paper: 100 on-policy update steps)
+num_update_steps: 100
+batch_size: 4
+gradient_accumulation_steps: 8
+max_length: 16384
+learning_rate: 5.0e-6
+warmup_ratio: 0.05
+max_grad_norm: 1.0
+seed: 42
+save_steps: 20
+log_steps: 5
+
+# PF-OPSD hyperparameters (paper Table A.1)
+advantage_temperature: 0.5
+lambda_sim: 0.05
+lambda_fa: 0.50
+lambda_fr: 0.25
+lambda_call: 0.02
+k_text_candidates: 4
+text_sample_temperature: 1.1
+max_sim_attempts: 3
+rollout_num_frames: 8
+max_rollout_frames: 8          # SFT-regularisation data: same cap as on-policy rollouts
+lambda_sft: 1.0
+
+# SFT regularisation data (paper: L = L_SFT + L_disc + L_text + λ_call·N_sim)
+# Stage-1 trajectory files are reused each step to keep the policy anchored.
+# Set lambda_sft: 0.0 to disable.
+sft_trajectory_dir: "trajectory_gen/output/trajectories"
+sft_batch_size: 2       # SFT mini-batch drawn per on-policy update step
+
+# Privileged evaluator (Qwen3.6-27B per paper)
+# Set evaluator_base_url to your OpenAI-compatible API endpoint,
+# or export OPENAI_API_BASE before running.
+evaluator_model: "Qwen3.6-27B"
+evaluator_base_url: ""         # falls back to $OPENAI_API_BASE or $OPENAI_API_KEY
+evaluator_api_key: ""          # falls back to $OPENAI_API_KEY
+
+# World model
+# Set world_model_type to "helios" and provide helios_base_url for real rollouts.
+# Use "stub" for offline testing (no Helios required).
+world_model_type: "stub"       # "stub" | "helios"
+helios_base_url: ""            # e.g. http://your-helios-endpoint or $HELIOS_BASE_URL
+helios_model: "helios-vrbench" # "helios-vrbench" | "helios-general"

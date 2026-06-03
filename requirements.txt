@@ -1,0 +1,16 @@
+# Core ML / training
+torch>=2.3.0
+transformers>=4.46.0
+accelerate>=0.32.0
+peft>=0.11.0
+trl>=0.12.0
+
+# API clients
+openai>=1.35.0
+requests>=2.31.0
+
+# Image handling
+Pillow>=10.0.0
+
+# Config / utilities
+PyYAML>=6.0

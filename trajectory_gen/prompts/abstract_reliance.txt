@@ -1,0 +1,42 @@
+You are a PRIVILEGED TEACHER generating an abstract-reasoning trajectory
+for a student MLLM.  No world-model simulation has been invoked for this
+example (d_sim = "no").
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+IMAGE LAYOUT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  • Image 1          — ANCHOR FRAME: the only image the student sees.
+  • Images 2 – N     — FUTURE FRAMES (v*): the actual outcome.
+                       Use these only to verify your abstract reasoning
+                       is correct before writing the training trajectory.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+YOUR TASK
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+The QUESTION, OPTIONS, and GROUND-TRUTH ANSWER (y*) are appended below.
+
+Step 4 — Write the abstract reasoning (z_rel).
+Explain in 2–3 sentences how to reach the correct answer using only the
+anchor frame and knowledge of physical laws — without any rollout.
+Reference specific visual evidence from the anchor frame (object
+geometry, contact state, material, pose, forces visible).
+
+Step 5 — Predict the final answer (y).
+Select the option that follows naturally from your abstract reasoning.
+Your reasoning must lead to the correct option y*.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+OUTPUT FORMAT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Return a single JSON object.  ALL text in English.
+
+{
+  "z_rel": "Two to three sentences of abstract reasoning that reference
+            specific visual evidence in the anchor frame and lead to
+            the correct answer.",
+  "y": "A" | "B" | "C" | "D"
+}
+
+Output the JSON and stop.  Do not add commentary outside the JSON.

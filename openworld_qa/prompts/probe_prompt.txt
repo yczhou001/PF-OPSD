@@ -1,0 +1,3 @@
+Answer the physical reasoning question below using the image provided.
+Choose the single best answer. Reply with JSON only: {"answer": "A"}
+The answer must be one of: A, B, C, or D.
