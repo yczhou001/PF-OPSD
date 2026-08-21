@@ -6,6 +6,7 @@
   <a href="https://huggingface.co/datasets/YCZhou/vrqa_bench"><img src="https://img.shields.io/badge/🤗%20Dataset-VRQABench-ff9d00.svg" alt="VRQABench"></a>
   <a href="https://huggingface.co/datasets/YCZhou/openworld_qa"><img src="https://img.shields.io/badge/🤗%20Dataset-OpenWorldQA-ff9d00.svg" alt="OpenWorldQA"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License: MIT"></a>
+  <a href="https://2026.emnlp.org/"><img src="https://img.shields.io/badge/EMNLP-2026-blue.svg" alt="EMNLP 2026"></a>
 </p>
 
 > **PF-OPSD** — Privileged-Future On-Policy Self-Distillation for controlled concrete reasoning in MLLMs.
