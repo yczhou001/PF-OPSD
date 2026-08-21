@@ -1,12 +1,11 @@
-# World Models Meet Language Models: On the Complementarity of Concrete and Abstract Reasoning
+# World Models Meet Language Models: On the Complementarity of Concrete and Abstract Reasoning (EMNLP 2026)
 
 <p align="center">
-  <a href="https://arxiv.org/abs/2606.03603"><img src="https://img.shields.io/badge/arXiv-2606.03603-b31b1b.svg?logo=arxiv&logoColor=white" alt="arXiv"></a>
+  <a href="https://arxiv.org/abs/2606.03603"><img src="https://img.shields.io/badge/EMNLP-2026-blue.svg" alt="EMNLP 2026"></a>
   <a href="https://github.com/yczhou001/PF-OPSD"><img src="https://img.shields.io/badge/GitHub-PF--OPSD-181717.svg?logo=github&logoColor=white" alt="GitHub"></a>
   <a href="https://huggingface.co/datasets/YCZhou/vrqa_bench"><img src="https://img.shields.io/badge/🤗%20Dataset-VRQABench-ff9d00.svg" alt="VRQABench"></a>
   <a href="https://huggingface.co/datasets/YCZhou/openworld_qa"><img src="https://img.shields.io/badge/🤗%20Dataset-OpenWorldQA-ff9d00.svg" alt="OpenWorldQA"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License: MIT"></a>
-  <a href="https://2026.emnlp.org/"><img src="https://img.shields.io/badge/EMNLP-2026-blue.svg" alt="EMNLP 2026"></a>
 </p>
 
 > **PF-OPSD** — Privileged-Future On-Policy Self-Distillation for controlled concrete reasoning in MLLMs.
